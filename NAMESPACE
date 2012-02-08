@@ -1,0 +1,8 @@
+export(OLScurve)
+export(parplot)
+export(subjplot)
+import(lattice)
+S3method(parplot,OLScurve)
+S3method(plot,OLScurve)
+S3method(print,OLScurve)
+S3method(subjplot,OLScurve)

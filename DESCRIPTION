@@ -1,0 +1,23 @@
+Package: OLScurve
+Type: Package
+Title: OLS growth curve trajectories
+Version: 0.1.1
+Date: 2012-02-07
+Author: Phil Chalmers <rphilip.chalmers@gmail.com> and
+    Carrie Smith <carrie.elizabeth@gmail.com>
+Maintainer: Phil Chalmers <rphilip.chalmers@gmail.com>
+Description: Provides tools for organizing, calculating, and
+    plotting ordinary least squares growth curve trajectories. These
+    type of models are typically used to diagnose the effectiveness
+    of a specified time functional form at the individual level rather
+    than at the group level (where FIML estimation is required).
+Depends:
+    lattice
+LazyLoad: yes
+LazyData: yes
+Repository: github
+License: GPL (>= 2)
+Collate:
+    'OLScurve.R'
+    'parplot.R'
+    'subjplot.R'
