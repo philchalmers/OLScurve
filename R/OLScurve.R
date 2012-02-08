@@ -16,7 +16,6 @@
 #' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com}
 #' @keywords OLS, growth
 #' @export OLScurve
-#' @import lattice
 #' @examples 
 #' 
 #' \dontrun{

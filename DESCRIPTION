@@ -21,3 +21,4 @@ Collate:
     'OLScurve.R'
     'parplot.R'
     'subjplot.R'
+    'OLScurve-package.R'
