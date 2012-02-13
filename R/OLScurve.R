@@ -30,7 +30,7 @@
 #' @param formula a \code{formula} specifying how the functional form of \code{time} should be 
 #'    coded. The keyword \code{time} must be used, and additive components such as powers, square 
 #'    roots, and exponentials can be included
-#' @param data a data frame in the long (one subject per row) format containting only the time
+#' @param data a data frame in the wide (one subject per row) format containting only the time
 #'    related variables. Can be of class \code{matrix} or \code{data.frame} 
 #' @param time the relative spacing between time points. Default is equal spacing
 #' @param x an \code{OLScurve} object
@@ -45,9 +45,9 @@
 #' @seealso \code{\link{parplot}}, \code{\link{subjplot}}
 #' @references 
 #'
-#' Bollen, K. A. & Curran, P. J. (2006). \emph{Latent Curve Models: A Structural Equation Perspective}. John #' Wiley & Sons.
+#' Bollen, K. A. & Curran, P. J. (2006). \emph{Latent Curve Models: A Structural Equation Perspective}. John Wiley & Sons.
 #'
-#' Carrig, M. M., Wirth, R. J., & Curran, P. J. (2004). A SAS Macro for Estimating and Visualizing Individual #' Growth Curves. \emph{Structural Equation Modeling, 11}, 132-149.
+#' Carrig, M. M., Wirth, R. J., & Curran, P. J. (2004). A SAS Macro for Estimating and Visualizing Individual Growth Curves. \emph{Structural Equation Modeling, 11}, 132-149.
 #'
 #'
 #' @examples 

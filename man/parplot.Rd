@@ -1,7 +1,7 @@
 \name{parplot}
 \alias{parplot}
 \alias{parplot.OLScurve}
-\title{Plot individually estimated parameters}
+\title{Plot distribution of parameters}
 \usage{
   parplot(object, ...)
 

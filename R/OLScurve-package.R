@@ -11,7 +11,9 @@
 #' @name OLScurve-package
 #' @docType package
 #' @title OLS growth curve trajectories
-#' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com}
+#' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com} and
+#'    Carrie Smith \email{carrie.elizabeth@@gmail.com} and
+#'    Matthew Sigal \email{matthewsigal@@gmail.com}
 #' @import lattice
 #' @keywords package
 NULL

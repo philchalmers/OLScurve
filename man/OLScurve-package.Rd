@@ -14,7 +14,9 @@
   FIML estimation is required).
 }
 \author{
-  Phil Chalmers \email{rphilip.chalmers@gmail.com}
+  Phil Chalmers \email{rphilip.chalmers@gmail.com} and
+  Carrie Smith \email{carrie.elizabeth@gmail.com} and
+  Matthew Sigal \email{matthewsigal@gmail.com}
 }
 \keyword{package}
 

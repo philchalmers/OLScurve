@@ -1,4 +1,4 @@
-#' Plot individually estimated parameters
+#' Plot distribution of parameters
 #' 
 #' A plotting function for displaying the distribution of the OLS parameter
 #' estimates. 

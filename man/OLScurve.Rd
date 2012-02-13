@@ -19,7 +19,7 @@
   such as powers, square roots, and exponentials can be
   included}
 
-  \item{data}{a data frame in the long (one subject per
+  \item{data}{a data frame in the wide (one subject per
   row) format containting only the time related variables.
   Can be of class \code{matrix} or \code{data.frame}}
 
@@ -128,11 +128,11 @@ subjplot(mod)
 }
 \references{
   Bollen, K. A. & Curran, P. J. (2006). \emph{Latent Curve
-  Models: A Structural Equation Perspective}. John #' Wiley
-  & Sons.
+  Models: A Structural Equation Perspective}. John Wiley &
+  Sons.
 
   Carrig, M. M., Wirth, R. J., & Curran, P. J. (2004). A
-  SAS Macro for Estimating and Visualizing Individual #'
+  SAS Macro for Estimating and Visualizing Individual
   Growth Curves. \emph{Structural Equation Modeling, 11},
   132-149.
 }
