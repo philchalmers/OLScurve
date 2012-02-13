@@ -9,18 +9,23 @@
     group = NULL, breaks = NULL, ...)
 }
 \arguments{
-  \item{object}{DESCRIPTION}
+  \item{object}{an object of class \code{OLScurve}}
 
-  \item{type}{DESCRIPTION}
+  \item{type}{type of plot to display; can be
+  \code{'hist'}, \code{'boxplot'}, or \code{'splom'} for a
+  histogram, boxplot, or scatter plot matrix}
 
-  \item{group}{DESCRIPTION}
+  \item{group}{a \code{factor} grouping variable used to
+  parition the results}
 
-  \item{breaks}{DESCRIPTION}
+  \item{breaks}{number of breaks to be used in plotting the
+  histogram}
 
-  \item{...}{DESCRIPTION}
+  \item{...}{additional arguments to be passed}
 }
 \description{
-  Description of \code{parplot}
+  A plotting function for displaying the distribution of
+  the OLS parameter estimates.
 }
 \examples{
 \dontrun{

@@ -9,16 +9,20 @@
     layout = NULL, ...)
 }
 \arguments{
-  \item{object}{DESCRIPTION}
+  \item{object}{an object of class \code{OLScurve}}
 
-  \item{group}{DESCRIPTION}
+  \item{group}{a \code{factor} grouping variable used to
+  parition the results}
 
-  \item{layout}{DESCRIPTION}
+  \item{layout}{a variable to be passed to \code{xyplot} to
+  adjust the graphical layout}
 
-  \item{...}{DESCRIPTION}
+  \item{...}{additional arguments to be passed}
 }
 \description{
-  Description of \code{parplot}
+  A plotting function for displaying the individuals
+  trajectories and their modelled functional form. Useful
+  for detecting aberrant individual trajectories.
 }
 \examples{
 \dontrun{

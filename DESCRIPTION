@@ -1,11 +1,11 @@
 Package: OLScurve
 Type: Package
 Title: OLS growth curve trajectories
-Version: 0.1.1
+Version: 0.1.2
 Date: 2012-02-07
 Author: Phil Chalmers <rphilip.chalmers@gmail.com> and
     Carrie Smith <carrie.elizabeth@gmail.com> and
-	Matthew Sigal <matthewsigal@gmail.com>	
+    Matthew Sigal <matthewsigal@gmail.com>
 Maintainer: Phil Chalmers <rphilip.chalmers@gmail.com>
 Description: Provides tools for organizing, calculating, and
     plotting ordinary least squares growth curve trajectories. These

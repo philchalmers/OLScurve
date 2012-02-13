@@ -1,13 +1,14 @@
 #' Plot individually estimated parameters
 #' 
-#' Description of \code{parplot}
+#' A plotting function for displaying the individuals trajectories and their 
+#' modelled functional form. Useful for detecting aberrant individual trajectories.
 #' 
 #' 
 #' @aliases subjplot
-#' @param object DESCRIPTION
-#' @param group DESCRIPTION
-#' @param layout DESCRIPTION
-#' @param ... DESCRIPTION
+#' @param object an object of class \code{OLScurve}
+#' @param group a \code{factor} grouping variable used to parition the results
+#' @param layout a variable to be passed to \code{xyplot} to adjust the graphical layout
+#' @param ... additional arguments to be passed
 #' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com}
 #' @keywords OLS, growth
 #' @export subjplot

@@ -1,0 +1,11 @@
+OLScurve_0.1.2
+----------------------------------------------------------------
+
+* major documentation additions, filling in the placeholders that were 
+  previously there.
+  
+* removed .gitignore to avoid problems with Rstudio projects
+
+* moved changes to NEWS, since it is better tracked within the R HTML 
+  help guides
+  

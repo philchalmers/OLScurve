@@ -1,14 +1,16 @@
 #' Plot individually estimated parameters
 #' 
-#' Description of \code{parplot}
+#' A plotting function for displaying the distribution of the OLS parameter
+#' estimates. 
 #' 
 #' 
 #' @aliases parplot
-#' @param object DESCRIPTION
-#' @param type DESCRIPTION
-#' @param group DESCRIPTION
-#' @param breaks DESCRIPTION
-#' @param ... DESCRIPTION
+#' @param object an object of class \code{OLScurve}
+#' @param type type of plot to display; can be \code{'hist'}, \code{'boxplot'}, or \code{'splom'}
+#'    for a histogram, boxplot, or scatter plot matrix
+#' @param group a \code{factor} grouping variable used to parition the results
+#' @param breaks number of breaks to be used in plotting the histogram
+#' @param ... additional arguments to be passed
 #' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com}
 #' @keywords OLS, growth
 #' @export parplot
