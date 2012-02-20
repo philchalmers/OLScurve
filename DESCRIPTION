@@ -7,11 +7,9 @@ Author: Phil Chalmers <rphilip.chalmers@gmail.com> and
     Carrie Smith <carrie.elizabeth@gmail.com> and
     Matthew Sigal <matthewsigal@gmail.com>
 Maintainer: Phil Chalmers <rphilip.chalmers@gmail.com>
-Description: Provides tools for organizing, calculating, and
-    plotting ordinary least squares growth curve trajectories. These
-    type of models are typically used to diagnose the effectiveness
-    of a specified time functional form at the individual level rather
-    than at the group level (where FIML estimation is required).
+Description: Provides tools for more easily organizing and
+    plotting individual ordinary least square (OLS) growth curve 
+	trajectories. 
 Depends:
     lattice
 LazyLoad: yes
