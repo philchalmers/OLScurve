@@ -92,8 +92,6 @@
 #' mod <- OLScurve(~ time, data)
 #' print(mod,group)
 #' plot(mod,group)
-#' subjplot(mod)
-
 #' }
 OLScurve <- function(formula, data, time = 0:(ncol(data)-1), ...){
 	call <- match.call()

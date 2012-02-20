@@ -120,7 +120,6 @@ group <- c(rep('male',100),rep('female',100))
 mod <- OLScurve(~ time, data)
 print(mod,group)
 plot(mod,group)
-subjplot(mod)
 }
 }
 \author{
