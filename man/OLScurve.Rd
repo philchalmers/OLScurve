@@ -101,7 +101,7 @@ plot(mod3)
 
 ##exponential
 data <- t(t(matrix(rnorm(1000,0,5),200)) + exp(0:4))
-mod4 <- OLScurve(~ sqrt(time), data = data)
+mod4 <- OLScurve(~ exp(time), data = data)
 mod4
 plot(mod4)
 
