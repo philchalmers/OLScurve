@@ -45,9 +45,11 @@
 #' @seealso \code{\link{parplot}}, \code{\link{subjplot}}
 #' @references 
 #'
-#' Bollen, K. A. & Curran, P. J. (2006). \emph{Latent Curve Models: A Structural Equation Perspective}. John Wiley & Sons.
+#' Bollen, K. A. & Curran, P. J. (2006). \emph{Latent Curve Models: 
+#'    A Structural Equation Perspective}. John Wiley & Sons.
 #'
-#' Carrig, M. M., Wirth, R. J., & Curran, P. J. (2004). A SAS Macro for Estimating and Visualizing Individual Growth Curves. \emph{Structural Equation Modeling, 11}, 132-149.
+#' Carrig, M. M., Wirth, R. J., & Curran, P. J. (2004). A SAS Macro for Estimating and Visualizing 
+#'    Individual Growth Curves. \emph{Structural Equation Modeling, 11}, 132-149.
 #'
 #'
 #' @examples 

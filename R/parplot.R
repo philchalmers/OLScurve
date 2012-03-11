@@ -60,7 +60,7 @@ parplot.OLScurve <- function(object, type = 'hist', group = NULL,
 	if(type == 'hist'){
 		for(i in 1:npars){      
 			form <- as.formula(forms[i])
-			print(histogram(form,pars2,xlab = Names[i],breaks = breaks,main = 'Parameter Distributions'))			
+			print(histogram(form,pars2,xlab = Names[i],breaks = breaks,main = 'Parameter Distributions'))
 		}
 	}
 	if(type == 'boxplot'){
