@@ -28,7 +28,7 @@ subjplot <- function(object, ...){
 #' @S3method subjplot OLScurve
 #' @rdname subjplot 
 #' @method subjplot OLScurve 
-subjplot.OLScurve <- function(object, group = NULL, layout = NULL, ...)
+subjplot.OLScurve <- function(object, SE = FALSE, group = NULL, layout = NULL, ...)
 {
 	data <- object$data
 	N <- nrow(data)
@@ -72,12 +72,19 @@ subjplot.OLScurve <- function(object, group = NULL, layout = NULL, ...)
 			fm <- lm(fn2)
 			panel.lines(x,predict(fm))
 		}
-		  
-		subjectPlots <- xyplot( y ~ time | factor(id), datalg, groups = id, layout = layout,
-			xlab = "time",
-			ylab = "",
-			main = 'Subject plots',
-			panel = mypanel)
+		
+        ##### FIXME - for standard errors around each line
+        if(SE){
+            
+            
+            
+        } else {
+    		subjectPlots <- xyplot( y ~ time | factor(id), datalg, groups = id, layout = layout,
+    			xlab = "time",
+    			ylab = "",
+    			main = 'Subject plots',
+    			panel = mypanel)
+        }
 		  
 		print(subjectPlots)	  				
 	}
