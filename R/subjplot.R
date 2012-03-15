@@ -2,6 +2,7 @@
 #' 
 #' A plotting function for displaying the individuals trajectories and their 
 #' modelled functional form. Useful for detecting aberrant individual trajectories.
+#' Will also produce standard error bars for individual trajectories.
 #' 
 #' 
 #' @aliases subjplot
