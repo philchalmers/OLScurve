@@ -28,16 +28,25 @@ subjplot <- function(object, ...){
 #' @S3method subjplot OLScurve
 #' @rdname subjplot 
 #' @method subjplot OLScurve 
-subjplot.OLScurve <- function(object, SE = FALSE, group = NULL, layout = NULL, ...)
+subjplot.OLScurve <- function(object, group = NULL, layout = NULL, ...)
 {
 	data <- object$data
 	N <- nrow(data)
 	fn <- fn1 <- object$formula
 	id.o <- id <- as.numeric(rownames(data))
 	data <- data.frame(data)	
+    colours <- rep(c('red','blue','black','darkviolet','green','black','goldenrod'), length.out=N)
+	ypred <- object$pred
+    lower <- object$lower
+	upper <- object$upper
+	yprednames <- colnames(ypred) <- paste('pred', 1:ncol(ypred),sep='')
+    lowernames <- colnames(lower) <- paste('lower', 1:ncol(lower),sep='')
+	uppernames <- colnames(upper) <- paste('upper', 1:ncol(upper),sep='')
+	
 	if(is.null(layout)) layout <- c(ceiling(log(N)),ceiling(log(N)))
 	
-	plotOLScurve <- function(data, fn, group = NULL, layout = NULL) {
+	plotOLScurve <- function(data, fn, group = NULL, layout = NULL) 
+    {
 		devAskNewPage(ask=TRUE)
 		data <- data.frame(data) 
 		if(is.null(data$id)) data$id.o<-1:nrow(data) 
@@ -54,39 +63,40 @@ subjplot.OLScurve <- function(object, SE = FALSE, group = NULL, layout = NULL, .
 		}
 		ys <- colnames(data)[!(colnames(data)=="id")&
 			!(colnames(data)=="group")&
-			!(colnames(data)=="id.o")]
-		datalg <- reshape(data, idvar="id",
-					varying = list(ys),
-					v.names = c("y"), 
-					times = c(1:length(ys)),
-					direction="long")
+			!(colnames(data)=="id.o")]        		
+		data2 <- data.frame(data,ypred,lower,upper,colours=colours)
+		datalg <- reshape(data2, idvar="id",
+		                  varying = list(ys,yprednames,lowernames,uppernames),
+		                  v.names = c("y","ypred","lower","upper"), 
+		                  times = c(1:length(ys)),
+		                  direction="long")
+        
 		ch <- as.character(fn)
 		ch[2] <- gsub("x","y",ch[2],fixed=TRUE)
 		ch[3] <- gsub("time","x",ch[3],fixed=TRUE)
 		fn1 <- paste(ch[2],ch[1],ch[3])
 
-		###### PLOT INDIVIDUAL PARTICIPANTS ######
-		mypanel = function(x, y, ...){
-			panel.xyplot(x, y, ...)
+		###### PLOT INDIVIDUAL PARTICIPANTS ######		
+		mypanel = function(x, y, subscripts, lower, upper, colours, ...){
+		    upper <- upper[subscripts]
+		    lower <- lower[subscripts]		    
+		    panel.polygon(c(x,rev(x)),c(upper,rev(lower)), col=gray(.95), border=NA, ...)
+            
+			panel.xyplot(x, y, col = colours[subscripts], ...)
 			fn2 <- as.formula(fn1)
 			fm <- lm(fn2)
-			panel.lines(x,predict(fm))
+			panel.lines(x,predict(fm))						
 		}
-		
-        ##### FIXME - for standard errors around each line
-        if(SE){
-            
-            
-            
-        } else {
-    		subjectPlots <- xyplot( y ~ time | factor(id), datalg, groups = id, layout = layout,
+        subjectPlots <- xyplot( y ~ time | factor(id), data=datalg, 
+                layout = layout,
     			xlab = "time",
     			ylab = "",
     			main = 'Subject plots',
-    			panel = mypanel)
-        }
-		  
-		print(subjectPlots)	  				
+                upper = datalg$upper,
+    		    lower = datalg$lower,                  
+                colours = datalg$colours,                                
+    			panel = mypanel)                		  
+		print(subjectPlots)        
 	}
 	plotOLScurve(data, fn, group, layout)
 }
