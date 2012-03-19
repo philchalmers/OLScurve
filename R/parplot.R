@@ -30,7 +30,7 @@ parplot <- function(object, ...){
 #' @rdname parplot 
 #' @method parplot OLScurve 
 parplot.OLScurve <- function(object, type = 'hist', group = NULL, 
-	breaks = NULL, ...)
+	breaks = NULL, prompt = TRUE, ...)
 {
 	pars <- object$pars
 	npars <- ncol(pars)
@@ -56,7 +56,7 @@ parplot.OLScurve <- function(object, type = 'hist', group = NULL,
 			splom(~pars|group, data = pars, main = 'Growth Parameters')		
 		}
 	}
-	devAskNewPage(ask=TRUE)
+	if(prompt) devAskNewPage(ask=TRUE)
 	if(type == 'hist'){
 		for(i in 1:npars){      
 			form <- as.formula(forms[i])

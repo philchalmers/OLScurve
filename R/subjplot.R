@@ -8,6 +8,7 @@
 #' @param object an object of class \code{OLScurve}
 #' @param group a \code{factor} grouping variable used to parition the results
 #' @param layout a variable to be passed to \code{xyplot} to adjust the graphical layout
+#' @param prompt a logical variable indicating whether \code{devAskNewPage(ask=TRUE)} should be called
 #' @param ... additional arguments to be passed
 #' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com}
 #' @keywords OLS, growth
@@ -28,7 +29,7 @@ subjplot <- function(object, ...){
 #' @S3method subjplot OLScurve
 #' @rdname subjplot 
 #' @method subjplot OLScurve 
-subjplot.OLScurve <- function(object, group = NULL, layout = NULL, ...)
+subjplot.OLScurve <- function(object, group = NULL, layout = NULL, prompt = TRUE, ...)
 {
 	data <- object$data
 	N <- nrow(data)
@@ -47,7 +48,7 @@ subjplot.OLScurve <- function(object, group = NULL, layout = NULL, ...)
 	
 	plotOLScurve <- function(data, fn, group = NULL, layout = NULL) 
     {
-		devAskNewPage(ask=TRUE)
+		if(prompt) devAskNewPage(ask=TRUE)
 		data <- data.frame(data) 
 		if(is.null(data$id)) data$id.o<-1:nrow(data) 
 			else data$id.o <- data$id 
@@ -80,7 +81,7 @@ subjplot.OLScurve <- function(object, group = NULL, layout = NULL, ...)
 		mypanel = function(x, y, subscripts, lower, upper, colours, ...){
 		    upper <- upper[subscripts]
 		    lower <- lower[subscripts]		    
-		    panel.polygon(c(x,rev(x)),c(upper,rev(lower)), col=gray(.95), border=NA, ...)
+		    panel.polygon(c(x,rev(x)),c(upper,rev(lower)), col=gray(.9), border=NA, ...)
             
 			panel.xyplot(x, y, col = colours[subscripts], ...)
 			fn2 <- as.formula(fn1)

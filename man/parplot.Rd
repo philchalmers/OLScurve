@@ -6,7 +6,7 @@
   parplot(object, ...)
 
   \method{parplot}{OLScurve} (object, type = "hist",
-    group = NULL, breaks = NULL, ...)
+    group = NULL, breaks = NULL, prompt = TRUE, ...)
 }
 \arguments{
   \item{object}{an object of class \code{OLScurve}}

@@ -6,7 +6,7 @@
   subjplot(object, ...)
 
   \method{subjplot}{OLScurve} (object, group = NULL,
-    layout = NULL, ...)
+    layout = NULL, prompt = TRUE, ...)
 }
 \arguments{
   \item{object}{an object of class \code{OLScurve}}
@@ -16,6 +16,9 @@
 
   \item{layout}{a variable to be passed to \code{xyplot} to
   adjust the graphical layout}
+
+  \item{prompt}{a logical variable indicating whether
+  \code{devAskNewPage(ask=TRUE)} should be called}
 
   \item{...}{additional arguments to be passed}
 }
