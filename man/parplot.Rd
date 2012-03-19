@@ -21,6 +21,9 @@
   \item{breaks}{number of breaks to be used in plotting the
   histogram}
 
+  \item{prompt}{a logical variable indicating whether
+  \code{devAskNewPage(ask=TRUE)} should be called}
+
   \item{...}{additional arguments to be passed}
 }
 \description{

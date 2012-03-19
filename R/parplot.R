@@ -10,6 +10,7 @@
 #'    for a histogram, boxplot, or scatter plot matrix
 #' @param group a \code{factor} grouping variable used to parition the results
 #' @param breaks number of breaks to be used in plotting the histogram
+#' @param prompt a logical variable indicating whether \code{devAskNewPage(ask=TRUE)} should be called
 #' @param ... additional arguments to be passed
 #' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com}
 #' @keywords OLS, growth

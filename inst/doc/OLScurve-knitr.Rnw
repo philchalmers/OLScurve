@@ -1,5 +1,8 @@
 \documentclass[11pt,doc]{apa6}
 
+
+% \VignetteIndexEntry{An Introduction to OLScurve}
+
 \usepackage{bm}
 \usepackage{txfonts} %times new roman
 \newcommand{\m}[1]{\mathbf{#1}}
