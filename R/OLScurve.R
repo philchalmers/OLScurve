@@ -201,15 +201,23 @@ print.OLScurve <- function(x, group = NULL, SE = TRUE, digits = 3, ...){
 #' @rdname OLScurve
 #' @method plot OLScurve 
 plot.OLScurve <- function(x, group = NULL, sep = FALSE, ...){
-	data <- x$data
+	data <- data.frame(x$pred)
 	N <- nrow(data)
 	fn <- fn1 <- x$formula
-	id.o <- id <- as.numeric(rownames(data))
-	data <- data.frame(data)		
-	
-	plotOLScurve <- function(data, fn, group = NULL, layout = NULL) {		
-		data <- data.frame(data)  
-		if(is.null(data$id)) data$id.o<-1:nrow(data)
+	id.o <- id <- as.numeric(rownames(data))	
+	meanpred <- list(colMeans(x$pred))	
+	IND <- rep(1, N)
+	###FIXME
+	# if(!is.null(group)){
+		# meannames <- unique(group)
+		# ID <- 1:length(meannames)
+		# for(i in 1:length(meannames))
+			# meanpred[[i]] <- colMeans(data[id[group == meannames[i]], ])				
+		# for(i in 1:N) IND[i] <- ID[group[i] == meannames]	 	
+	# }	
+		
+	plotOLScurve <- function(data, fn, meanpred, ind = IND, group = NULL, layout = NULL) {				
+		if(is.null(data$id)) data$id.o <- 1:nrow(data)
 			else data$id.o <- data$id 		  
 		if(!is.null(group)) 
 			data$group <- group		
@@ -221,10 +229,12 @@ plot.OLScurve <- function(x, group = NULL, sep = FALSE, ...){
 			data$id.o <- paste(data$group,data$id.o) 
 			plot.fn <- y ~ time | group
 		}
-
+		data$ind <- ind
+		
 		ys <- colnames(data)[!(colnames(data)=="id")&
 			!(colnames(data)=="group")&
-			!(colnames(data)=="id.o")]
+			!(colnames(data)=="id.o") &
+			!(colnames(data)=="ind")]
 
 		datalg <- reshape(data, idvar="id",
 				  varying = list(ys),
@@ -238,19 +248,21 @@ plot.OLScurve <- function(x, group = NULL, sep = FALSE, ...){
 		fn1 <- paste(ch[2],ch[1],ch[3])
 
 		###### PLOT INDIVIDUAL PARTICIPANTS ######
-		mypanel = function(x, y, ...){
-			fn2 <- as.formula(fn1)
-			fm <- lm(fn2)
-			panel.lines(x,predict(fm)) 
+		mypanel = function(x, y, meanpred, IND, subscripts, ...){			
+			panel.lines(x,y)				
+			grouppred <- meanpred[[1]] ###FIXME
+			panel.lines(x, grouppred, lwd=2, col='black')
 		}
-		groupPlots <-xyplot( plot.fn , datalg, groups = factor(id), 
+		groupPlots <- xyplot(plot.fn, datalg, groups = factor(id), 
 			layout = layout,
 			xlab = "Time",
 			ylab = "Predicted",
 			main = 'Group Plots',
+			meanpred = meanpred, 			
+			IND = datalg$ind,
 			panel = panel.superpose,
 			panel.groups = mypanel)
 		print(groupPlots)				
 	}
-	plotOLScurve(data, fn, group, layout = NULL)
+	plotOLScurve(data, fn, meanpred, IND, group, layout = NULL)
 }
