@@ -1,6 +1,5 @@
 \documentclass[11pt,doc]{apa6}
 
-
 % \VignetteIndexEntry{An Introduction to OLScurve}
 
 \usepackage{bm}
@@ -30,9 +29,15 @@
 
 \begin{document}
 
-<<master, echo=FALSE>>=
-#knitr::knit_theme$set("print")
-@
+\SweaveOpts{fig.align=center}
+
+%%%%%Uncomment to make Sweave like
+%\renewcommand{\hlfunctioncall}{}
+%\renewcommand{\hlkeyword}{}
+%\SweaveOpts{fig.align=center, prompt=TRUE, message=FALSE, comment=NA}
+%<<master, echo=FALSE>>=
+%knitr::knit_theme$set("print")
+%@
 
 \maketitle
 
@@ -96,17 +101,14 @@ A short example of the functions available in \R{OLScurve.R} is presented here t
 
 Although we should suspect that a linear growth model would be best for these data, a quadratic relationship is tested first.
 
-<<load>>=
+<<loadquad>>=
 library("OLScurve")
 data(nonlin.example)
-@
-
-<<quadratic>>=
 mod.quad <- OLScurve( ~ time + I(time^2), data = nonlin.example)
 mod.quad
 @
 
-We observe from the output that the mean trajectory for the quadratic factor is not of great magnitude, and in fact fails to reach significance at the group level ($z \approx -0.001/0.022 = 0.045$, $p=.51$). We also observe that there is relatively little variance in the quadratic factor, so the conclusion not use a quadratic term appears to be corroborated. We now compose a linear trajectory model, determine if there are any major differences between the grouping variables, and observe how well this model fits the data at the individual trajectory level. 
+We observe from the output that the mean trajectory for the quadratic factor is not of great magnitude, and in fact fails to reach significance at the group level ($z \approx -0.001/0.022 = 0.045$, $p=.51$). We also observe that there is relatively little variance in the quadratic factor, so the conclusion not use a quadratic term appears to be corroborated. We now compose a linear trajectory model, determine if there are any major differences between the grouping variables, and observe how well this model fits the data at the individual trajectory level.
 
 <<echo=TRUE, eval=FALSE>>=
 mod.lin <- OLScurve( ~ time, data = nonlin.example)
@@ -119,23 +121,23 @@ mod.lin2 <- OLScurve( ~ time, data = nonlin.example[1:49,])
 @
 
 
-<<subjplot, echo=FALSE, fig.width=6, fig.align='center', fig.cap = "Title">>=
+<<subjplot, echo=FALSE, fig.width=6, fig.cap=First 49 cases from \R{subjplot()}.>>=
 subjplot(mod.lin2, layout = c(7,7), prompt = FALSE)
 @
 
-Additionally, we observe how the trajectory plots are related to gender using a \R{print} and \R{plot} function. However after inspecting these plots and coefficients there does not appear to be any major functional differences between males and females. 
+Additionally, we observe how the trajectory plots are related to gender using a \R{print} and \R{plot} function. However after inspecting these plots and coefficients there does not appear to be any major functional differences between males and females.
 
 <<printmod-lin>>=
 print(mod.lin, group = gender)
 @
 
-<<plotmod-lin, fig.cap="Figure", fig.width=5, fig.height=5, fig.align='center'>>= 
+<<plotmod-lin, fig.cap=Group allocated plot of the estimated trajectories., fig.width=5, fig.height=5>>=
 plot(mod.lin, group=gender)
 @
 
 Next, we use a scatter-plot matrix graphic (Figure~\ref{fig:splom}) to determine whether the assumption of linearity between trajectory parameters is tenable. Although comparing trajectory parameter relationships does not appear to be common practice according to texts on latent curve modeling \cite[e.g.,][]{BollenCurran2006} it is nonetheless an important area that should be probed to ensure that a proper LCM model has been fit to the data. For example, if one were to use Mplus \cite{Muth'enMuth'en2008} to fit a linear LCM to this simulated data they would find that the overall model fit extremely well, $\chi^2(5) = 3.652,\, p = .60$, where the correlation between the slope and intercept factors is $r_{\alpha\beta} = 0.053,\, z = 1.150,\, p = .25$. However, graphical inspection of the OLS parameters using \R{parplot()} reveals that even though the overall model fit may be excellent the conclusion that the intercept and slope are unrelated is far from correct (although it is true that there is no \emph{linear} relationship). It appears that individuals with higher \emph{and} lower initial intercepts tend to have larger slope trajectories, whereas those closely centered around the intercept mean have much smaller slopes. Similar conclusions could be drawn from estimating factor scores from the LCM in Mplus or other software, although the choice of which estimation method to employ may make a difference, and unfortunately researchers are often not comfortable analyzing calculated factor scores---perhaps due to the large literature surrounding factor score indeterminacy \cite{Bollen1989,Mulaik2010}.
 
-<<splom, eval=TRUE, fig.width=5, fig.height=5, fig.align='center', fig.cap = "Title">>=
+<<splom, eval=TRUE, fig.width=5, fig.height=5, fig.cap=Scatter-plot matrix between the intercept and slope parameter estimates.>>=
 parplot(mod.lin, type = 'splom')
 @
 
@@ -143,7 +145,7 @@ parplot(mod.lin, type = 'splom')
 
 As was demonstrated above, R now has the ability to comfortably implement OLS growth curves with the help of the \R{OLScurve.R} source code, and improves upon \citeAs{CarrigWirthCurran2004} SAS macro. Plotting the case-by-case trajectories has been substantially condensed to allow for viewing multiple cases per graph, compared to the SAS macro which plots one case per graphic, and other high quality graphics have been made available from the \R{lattice} package to facilitate analysis. The flexibility of model specification has also been greatly improved, since \R{OLScurve()} is not limited to modeling only linear and quadratic growth curves. Additionally the object returned by \R{OLScurve()} may have its individual elements extracted for further analyses that were not contained in the source code. Finally, and for completeness, selections of cases (via row extraction) defined by the user to allow sub-groupings to be analyzed separately is possible by simply extracting which rows in the \R{data} input are to be grouped and placing them in separate \R{matrix} or \R{data.frame} objects.
 
-In conclusion, OLS estimation can be used to evaluate many important and often overlooked model assumptions. Visually presenting estimates of individual growth trajectories allows for the identification of cases for which the selected functional form of growth may not characterize the manifest data, and further examination of these cases could reveal that these cases are indeed outliers. In this way, OLS estimation can be used either as a screening tool or as a post-hoc diagnostic tool to assess model misfit \cite{CarrigWirthCurran2004}. We hope that the range of flexibility offered by the \R{OLScurve.R} functions prove useful for researchers---who may or may not be regular R users---interested in broadening their latent curve modeling toolbox.
+In conclusion, OLS estimation can be used to evaluate many important and often overlooked model assumptions. Visually presenting estimates of individual growth trajectories allows for the identification of cases for which the selected functional form of growth may not characterize the manifest data, and further examination of these cases could reveal that these cases are indeed outliers. In this way, OLS estimation can be used either as a screening tool or as a post-hoc diagnostic tool to assess model misfit \cite{CarrigWirthCurran2004}. We hope that the range of flexibility offered by the \R{OLScurve} functions prove useful for researchers---who may or may not be regular R users---interested in broadening their latent curve modeling toolbox.
 
 \newpage
 \printbibliography
