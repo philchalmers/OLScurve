@@ -24,7 +24,7 @@ NULL
 #' \code{OLScurve}. 
 #' 
 #' 
-#' @param gender a vector identifying wether the repeated measure row was Male or Female
+#' @param gender a vector identifying whether the repeated measure row was Male or Female
 #' @name nonlin.example
 #' @docType data
 #' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com}
@@ -33,7 +33,7 @@ NULL
 
 #' Description of gender
 #' 
-#' A vector identifying wether the repeated measure row was Male or Female for the 
+#' A vector identifying whether the repeated measure row was Male or Female for the 
 #' \code{nonlin.example} dataset.
 #' 
 #' 

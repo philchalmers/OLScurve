@@ -6,7 +6,7 @@
 #' 
 #' @aliases subjplot
 #' @param object an object of class \code{OLScurve}
-#' @param group a \code{factor} grouping variable used to parition the results
+#' @param group a \code{factor} grouping variable used to partition the results
 #' @param layout a variable to be passed to \code{xyplot} to adjust the graphical layout
 #' @param prompt a logical variable indicating whether \code{devAskNewPage(ask=TRUE)} should be called
 #' @param ... additional arguments to be passed

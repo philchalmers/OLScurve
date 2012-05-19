@@ -8,7 +8,7 @@
 #' @param object an object of class \code{OLScurve}
 #' @param type type of plot to display; can be \code{'hist'}, \code{'boxplot'}, or \code{'splom'}
 #'    for a histogram, boxplot, or scatter plot matrix
-#' @param group a \code{factor} grouping variable used to parition the results
+#' @param group a \code{factor} grouping variable used to partition the results
 #' @param breaks number of breaks to be used in plotting the histogram
 #' @param prompt a logical variable indicating whether \code{devAskNewPage(ask=TRUE)} should be called
 #' @param ... additional arguments to be passed

@@ -30,14 +30,14 @@
 #' @param formula a \code{formula} specifying how the functional form of \code{time} should be 
 #'    coded. The keyword \code{time} must be used, and additive components such as powers, square 
 #'    roots, and exponentials can be included
-#' @param data a data frame in the wide (one subject per row) format containting only the time
+#' @param data a data frame in the wide (one subject per row) format containing only the time
 #'    related variables. Can be of class \code{matrix} or \code{data.frame} 
 #' @param time the relative spacing between time points. Default is equal spacing
 #' @param x an \code{OLScurve} object
-#' @param group a \code{factor} grouping variable used to parition the results
+#' @param group a \code{factor} grouping variable used to partition the results
 #' @param SE logical; print a list containing the standard errors?
 #' @param digits number of digits to round
-#' @param sep logical; should the plots be seperated?
+#' @param sep logical; should the plots be separated?
 #' @param ... additional arguments to be passed
 #' @author Phil Chalmers \email{rphilip.chalmers@@gmail.com}
 #' @keywords OLS, growth
