@@ -20,7 +20,7 @@
   included}
 
   \item{data}{a data frame in the wide (one subject per
-  row) format containting only the time related variables.
+  row) format containing only the time related variables.
   Can be of class \code{matrix} or \code{data.frame}}
 
   \item{time}{the relative spacing between time points.
@@ -29,14 +29,14 @@
   \item{x}{an \code{OLScurve} object}
 
   \item{group}{a \code{factor} grouping variable used to
-  parition the results}
+  partition the results}
 
   \item{SE}{logical; print a list containing the standard
   errors?}
 
   \item{digits}{number of digits to round}
 
-  \item{sep}{logical; should the plots be seperated?}
+  \item{sep}{logical; should the plots be separated?}
 
   \item{...}{additional arguments to be passed}
 }

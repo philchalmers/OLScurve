@@ -16,7 +16,7 @@
   histogram, boxplot, or scatter plot matrix}
 
   \item{group}{a \code{factor} grouping variable used to
-  parition the results}
+  partition the results}
 
   \item{breaks}{number of breaks to be used in plotting the
   histogram}

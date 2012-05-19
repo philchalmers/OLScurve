@@ -3,7 +3,7 @@
 \alias{gender}
 \title{Description of gender}
 \description{
-  A vector identifying wether the repeated measure row was
+  A vector identifying whether the repeated measure row was
   Male or Female for the \code{nonlin.example} dataset.
 }
 \author{

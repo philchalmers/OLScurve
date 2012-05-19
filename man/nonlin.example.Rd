@@ -3,7 +3,7 @@
 \alias{nonlin.example}
 \title{Description of nonlin.example data}
 \arguments{
-  \item{gender}{a vector identifying wether the repeated
+  \item{gender}{a vector identifying whether the repeated
   measure row was Male or Female}
 }
 \description{

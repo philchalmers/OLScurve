@@ -12,7 +12,7 @@
   \item{object}{an object of class \code{OLScurve}}
 
   \item{group}{a \code{factor} grouping variable used to
-  parition the results}
+  partition the results}
 
   \item{layout}{a variable to be passed to \code{xyplot} to
   adjust the graphical layout}
