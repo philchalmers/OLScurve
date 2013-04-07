@@ -3,6 +3,7 @@
 \bibliographystyle{apacite}
 \usepackage{amsmath}
 % \VignetteIndexEntry{An Introduction to OLScurve}
+% \VignetteEngine{knitr}
 \newcommand{\citeAs}[1]{\citeauthor{#1}'s \citeyear{#1}}
 \newcommand{\m}[1]{\mathbf{#1}}
 \newcommand{\R}[1]{\texttt{#1}}
@@ -27,7 +28,10 @@
 
 \begin{document}
 
-\SweaveOpts{fig.align='center'}
+<<setup, include=FALSE, cache=FALSE>>=
+require(knitr)
+opts_chunk$set(fig.align='center')
+@
 
 %%%%%Uncomment to make Sweave like
 %\renewcommand{\hlfunctioncall}{}

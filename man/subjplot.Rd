@@ -33,12 +33,17 @@ data <- t(t(matrix(rnorm(1000),200)) + 1:5)
 mod <- OLScurve(~ time, data = data)
 subjplot(mod)
 
+##quadratic
+data <- t(t(matrix(rnorm(1000),200)) + (0:4)^2)
+mod2 <- OLScurve(~ time + I(time^2), data = data)
+subjplot(mod2)
+
 
 }
 }
 \author{
   Phil Chalmers \email{rphilip.chalmers@gmail.com}
 }
-\keyword{growth}
 \keyword{OLS,}
+\keyword{growth}
 

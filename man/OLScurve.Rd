@@ -138,6 +138,6 @@ plot(mod,group)
 \seealso{
   \code{\link{parplot}}, \code{\link{subjplot}}
 }
-\keyword{growth}
 \keyword{OLS,}
+\keyword{growth}
 

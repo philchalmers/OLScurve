@@ -1,17 +1,26 @@
 Package: OLScurve
 Type: Package
 Title: OLS growth curve trajectories
-Version: 0.1.4
-Date: 2012-02-07
-Author: Phil Chalmers <rphilip.chalmers@gmail.com> and
-    Carrie Smith <carrie.elizabeth@gmail.com> and
-    Matthew Sigal <matthewsigal@gmail.com>
+Version: 0.1.5
+Date: 2013-04-07
+Authors@R: c(person('Phil', 'Chalmers',
+    email='rphilip.chalmers@gmail.com',
+    role=c('cre', 'aut')),
+    person('Carrie', 'Smith',
+    email='carrie.elizabeth@gmail.com',
+    role=c('ctb')),
+    person('Matthew', 'Sigal',
+    email='matthewsigal@gmail.com',
+    role=c('ctb')))
 Maintainer: Phil Chalmers <rphilip.chalmers@gmail.com>
 Description: Provides tools for more easily organizing and
     plotting individual ordinary least square (OLS) growth curve
     trajectories.
 Depends:
     lattice
+Imports:
+    knitr
+ByteCompile: yes
 LazyLoad: yes
 LazyData: yes
 Repository: github

@@ -35,12 +35,14 @@
 data <- t(t(matrix(rnorm(1000),200)) + 1:5)
 mod <- OLScurve(~ time, data = data)
 parplot(mod)
+parplot(mod, type = 'boxplot')
+parplot(mod, type = 'splom')
 
 }
 }
 \author{
   Phil Chalmers \email{rphilip.chalmers@gmail.com}
 }
-\keyword{growth}
 \keyword{OLS,}
+\keyword{growth}
 
