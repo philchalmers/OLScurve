@@ -32,7 +32,9 @@
 #'    roots, and exponentials can be included
 #' @param data a data frame in the wide (one subject per row) format containing only the time
 #'    related variables. Can be of class \code{matrix} or \code{data.frame} 
-#' @param time the relative spacing between time points. Default is equal spacing
+#' @param time the relative spacing between time points. Default is equal spacing. If time is a 
+#' \code{data.frame} object then custom weights may be specified, where the number of rows is equal 
+#' to the number of time points and the (named) columns equal the number patterns 
 #' @param x an \code{OLScurve} object
 #' @param group a \code{factor} grouping variable used to partition the results
 #' @param SE logical; print a list containing the standard errors?
@@ -84,7 +86,14 @@
 #' mod5 <- OLScurve(~ time + sqrt(time), data = data)    
 #' mod5
 #' plot(mod5)
-#'
+#' 
+#' ##piecewise linear
+#' data <- t(t(matrix(rnorm(1000),200)) + (0:4)^2) 
+#' time <- data.frame(time1 = c(0,1,2,3,4), time2 = c(0,0,0,1,2))
+#' mod6 <- OLScurve(~ time1 + time2, data, time=time)
+#' mod6
+#' plot(mod6)
+#' 
 #' ##two group analysis with linear trajectories
 #' data1 <- t(t(matrix(rnorm(500),100)) + 1:5) 
 #' data2 <- t(t(matrix(rnorm(500),100)) + 9:5)
@@ -95,8 +104,9 @@
 #' print(mod,group)
 #' plot(mod,group)
 #' }
-OLScurve <- function(formula, data, time = 0:(ncol(data)-1), ...){
-	call <- match.call()
+OLScurve <- function(formula, data, time = 0:(ncol(data)-1), ...){    
+	call <- match.call()    
+    if(!is.data.frame(time)) time <- data.frame(time=time)
 	ch <- as.character(formula)
 	if(length(ch) == 2) ch <- c(ch[1], "y", ch[2])
 		else ch[2] <- "y"
@@ -104,22 +114,24 @@ OLScurve <- function(formula, data, time = 0:(ncol(data)-1), ...){
 	N <- nrow(data)
 	J <- ncol(data)
 	formula <- as.formula(formula)
-	ind <- 1:N
+	ind <- 1L:N
 	rownames(data) <- as.character(ind)
 	orgdata <- data
 	data <- na.omit(as.matrix(data))
-	y <- data[1,]
-	npars <- length(lm(formula)$coef)	
+	y <- data[1L,]
+    dat <- data.frame(y=y, time)
+	npars <- length(lm(formula, dat)$coef)	
 	pars <- matrix(0,nrow(data),npars)
 	res <- lower <- upper <- pred <- data	
-	for(i in 1:nrow(data)){
+	for(i in 1L:nrow(data)){
 		y <- as.numeric(data[i,])
-		mod <- lm(formula)
+        dat <- data.frame(y=y, time)
+		mod <- lm(formula, dat)
 		pars[i,] <- mod$coef		
         tmp <- predict(mod,interval="confidence")
-		pred[i,] <- tmp[ ,1]
-		lower[i,] <- tmp[ ,2] 
-		upper[i,] <- tmp[ ,3]
+		pred[i,] <- tmp[ ,1L]
+		lower[i,] <- tmp[ ,2L] 
+		upper[i,] <- tmp[ ,3L]
 		res[i, ] <- residuals(mod)
 	}	
 	mod <- list(pars=pars, pred=pred, lower=lower, upper=upper, res=res, data=data.frame(data), 

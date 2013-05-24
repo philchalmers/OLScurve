@@ -24,7 +24,10 @@
   Can be of class \code{matrix} or \code{data.frame}}
 
   \item{time}{the relative spacing between time points.
-  Default is equal spacing}
+  Default is equal spacing. If time is a \code{data.frame}
+  object then custom weights may be specified, where the
+  number of rows is equal to the number of time points and
+  the (named) columns equal the number patterns}
 
   \item{x}{an \code{OLScurve} object}
 
@@ -110,6 +113,13 @@ data <- t(t(matrix(rnorm(1000),200)) + 20*sqrt(1:5))
 mod5 <- OLScurve(~ time + sqrt(time), data = data)
 mod5
 plot(mod5)
+
+##piecewise linear
+data <- t(t(matrix(rnorm(1000),200)) + (0:4)^2)
+time <- data.frame(time1 = c(0,1,2,3,4), time2 = c(0,0,0,1,2))
+mod6 <- OLScurve(~ time1 + time2, data, time=time)
+mod6
+plot(mod6)
 
 ##two group analysis with linear trajectories
 data1 <- t(t(matrix(rnorm(500),100)) + 1:5)
