@@ -1,6 +1,7 @@
 context('package')
 
 test_that('all', {
+    library(testthat)
     ##linear
     data <- t(t(matrix(rnorm(1000),200)) + 1:5)  
     mod1 <- OLScurve(~ time, data = data)        

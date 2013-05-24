@@ -19,6 +19,7 @@ Description: Provides tools for more easily organizing and
 Depends:
     lattice
 Imports:
+    testthat,
     knitr
 Suggests:
     lavaan
