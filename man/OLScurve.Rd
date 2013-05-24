@@ -8,7 +8,7 @@
     time = data.frame(time = 0:(ncol(data) - 1)), ...)
 
   \method{print}{OLScurve} (x, group = NULL, SE = TRUE,
-    digits = 3, ...)
+    adjust = FALSE, digits = 3, ...)
 
   \method{plot}{OLScurve} (x, group = NULL, sep = FALSE,
     ...)
@@ -41,6 +41,11 @@
   \item{sep}{logical; should the plots be separated?}
 
   \item{...}{additional arguments to be passed}
+
+  \item{adjust}{logical; apply adjustment to make the
+  variances unbiased? Only applicable for simple linear
+  trajectories. Unadjusted valuse can be interpreted as
+  upper bounds of the true variance parameters}
 }
 \description{
   The \code{OLScurve} provides a simple way of specifying
@@ -86,7 +91,8 @@
 ##linear
 data <- t(t(matrix(rnorm(1000),200)) + 1:5)
 mod1 <- OLScurve(~ time, data = data)
-mod1
+mod1 #unadjusted variances
+print(mod1, adjust = TRUE) #adjusted
 plot(mod1)
 
 ##quadratic

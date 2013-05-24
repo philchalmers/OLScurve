@@ -59,7 +59,8 @@
 #' ##linear
 #' data <- t(t(matrix(rnorm(1000),200)) + 1:5)  
 #' mod1 <- OLScurve(~ time, data = data)	
-#' mod1
+#' mod1 #unadjusted variances
+#' print(mod1, adjust = TRUE) #adjusted
 #' plot(mod1)
 #'
 #' ##quadratic
@@ -142,7 +143,10 @@ OLScurve <- function(formula, data, time = data.frame(time = 0:(ncol(data)-1)), 
 #' @S3method print OLScurve
 #' @rdname OLScurve 
 #' @method print OLScurve 
-print.OLScurve <- function(x, group = NULL, SE = TRUE, digits = 3, ...){
+#' @param adjust logical; apply adjustment to make the variances unbiased? Only applicable for 
+#' simple linear trajectories. Unadjusted valuse can be interpreted as upper bounds of the true
+#' variance parameters
+print.OLScurve <- function(x, group = NULL, SE = TRUE, adjust = FALSE, digits = 3, ...){
 	data <- x$data
 	orgdata <- x$orgdata	
 	J <- ncol(data)
@@ -151,7 +155,7 @@ print.OLScurve <- function(x, group = NULL, SE = TRUE, digits = 3, ...){
 	npars <- ncol(pars)
 	lowerind <- matrix(FALSE,npars,npars)
 	time <- x$time	
-	varEi <- rowSums((x$res^2))/(length(time) - 2)
+	varEi <- rowSums((x$res^2))/(nrow(time) - 2)
 	varE <- mean(varEi)	
 	for(i in 1:npars)
 		for(j in 1:npars)
@@ -177,15 +181,27 @@ print.OLScurve <- function(x, group = NULL, SE = TRUE, digits = 3, ...){
 	}
 	Names <- gsub(" ","",Names)
 	Names <- gsub("-",")",Names)	
-	Meanslist <- Covlist <- SElist <- list()	
-	for(i in 1:loops){
+	Meanslist <- Covlist <- SElist <- list()     
+	mf <- model.frame(x$formula, data=data.frame(y=as.numeric(x$data[1,]), x$time))
+    mm <- model.matrix(x$formula, mf)        
+	for(i in 1L:loops){
 		Means <- colMeans(pars[group == u[i],])
 		Ntmp <- nrow(pars[group == u[i],])
-		MeanSEs	<- sqrt(colSums(((pars[group == u[i],] - Means)^2)/(Ntmp-1))/Ntmp)
-		varEtmp <- mean(varEi[group == u[i]])
+		tmp <- t(t(pars[group == u[i],]) - Means)        
+		MeanSEs	<- sqrt( (colSums(t(t(pars[group == u[i],]) - Means)^2)/(Ntmp-1)) / Ntmp)        
 		Cov <- cov(pars[group == u[i],])		
-		Cor <- cor(pars[group == u[i],])
-		Cov[lowerind] <- Cor[lowerind]
+		Cor <- cor(pars[group == u[i],])    	
+        if(adjust){
+            need <- matrix(c(rep(1, nrow(mm)), 0:(nrow(mm)-1)), ncol=2)
+            if(all(mm != need)) 
+                stop('adjustment is only applicable to simple linear trajectories')
+            lam2 <- sum(need[,2]^2)
+            lam_mean2 <- sum((need[,2] - mean(need[,2]))^2)            
+            varEg <- mean(varEi[group == u[i]])            
+            Cov[1,1] <- Cov[1,1] - varEg / lam_mean2
+            Cov[2,2] <- Cov[2,2] - varEg * lam2 / (lam_mean2 * nrow(need))            
+        }        
+        Cov[upper.tri(Cov)] <- Cor[upper.tri(Cov)]
 		names(MeanSEs) <- names(Means) <- colnames(Cov) <- rownames(Cov) <- Names				
 		Meanslist[[i]] <- round(Means,digits)
 		Covlist[[i]] <- round(Cov, digits)		
@@ -194,18 +210,19 @@ print.OLScurve <- function(x, group = NULL, SE = TRUE, digits = 3, ...){
 	names(Meanslist) <- names(Covlist) <- names(SElist) <- u
 	cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), 
 		"\n", sep = "")
-	cat("Note: ", (1-x$omitted)*100,
+	cat("\nNote: ", (1-x$omitted)*100,
 		"% ommited cases. \n", sep='')	
-	cat("Pooled standard error = ",varE,"\n\n")	
+	cat("Pooled standard error =",sqrt(varE),"\n\n")	
 	cat("MEANS:\n\n")	
 	print(Meanslist)	
 	if(SE){		
-		cat("Standard Errors for Means:\n\n")	
+		cat("STANDARD ERRORS:\n\n")	
 		print(SElist)	
 	}
-	cat("\nCOVARIANCE (correlations on lower off-diagonal):\n\n")
+	if(adjust) cat("\nADJUSTED COVARIANCE (correlations on upper off-diagonal):\n\n")
+	else cat("\nCOVARIANCE (correlations on upper off-diagonal):\n\n")    
 	print(Covlist)
-	invisible(list(Meanslist,Covlist,SElist))
+	invisible(list(Meanslist,Covlist,SElist,varE))
 }
 
 #' @S3method plot OLScurve
