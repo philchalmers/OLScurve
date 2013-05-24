@@ -4,7 +4,8 @@
 \alias{print.OLScurve}
 \title{Ordinary least squares growth curve trajectories}
 \usage{
-  OLScurve(formula, data, time = 0:(ncol(data) - 1), ...)
+  OLScurve(formula, data,
+    time = data.frame(time = 0:(ncol(data) - 1)), ...)
 
   \method{print}{OLScurve} (x, group = NULL, SE = TRUE,
     digits = 3, ...)
@@ -14,20 +15,18 @@
 }
 \arguments{
   \item{formula}{a \code{formula} specifying how the
-  functional form of \code{time} should be coded. The
-  keyword \code{time} must be used, and additive components
-  such as powers, square roots, and exponentials can be
-  included}
+  functional form of \code{time} should be coded. By
+  default \code{time} is the only predictor but can be
+  modified to, and any typical additive R formula may be
+  used (e.g., powers, square roots, and exponentials)}
 
   \item{data}{a data frame in the wide (one subject per
   row) format containing only the time related variables.
   Can be of class \code{matrix} or \code{data.frame}}
 
-  \item{time}{the relative spacing between time points.
-  Default is equal spacing. If time is a \code{data.frame}
-  object then custom weights may be specified, where the
-  number of rows is equal to the number of time points and
-  the (named) columns equal the number patterns}
+  \item{time}{a \code{data.frame } object specifying the
+  relative spacing between time points. The default is for
+  equal spacing and this variable is name \code{time}.}
 
   \item{x}{an \code{OLScurve} object}
 
@@ -114,7 +113,7 @@ mod5 <- OLScurve(~ time + sqrt(time), data = data)
 mod5
 plot(mod5)
 
-##piecewise linear
+##piecewise (global linear trend with linear shift at time point 3)
 data <- t(t(matrix(rnorm(1000),200)) + (0:4)^2)
 time <- data.frame(time1 = c(0,1,2,3,4), time2 = c(0,0,0,1,2))
 mod6 <- OLScurve(~ time1 + time2, data, time=time)

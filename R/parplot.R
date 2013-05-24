@@ -60,6 +60,7 @@ parplot.OLScurve <- function(object, type = 'hist', group = NULL,
 		}
 	}
 	if(prompt) devAskNewPage(ask=TRUE)
+	else devAskNewPage(ask=FALSE)
 	if(type == 'hist'){
 		for(i in 1:npars){      
 			form <- as.formula(forms[i])

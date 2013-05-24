@@ -1,7 +1,7 @@
 Package: OLScurve
 Type: Package
 Title: OLS growth curve trajectories
-Version: 0.1.5
+Version: 0.2.0
 Date: 2013-04-07
 Authors@R: c(person('Phil', 'Chalmers',
     email='rphilip.chalmers@gmail.com',
@@ -20,6 +20,8 @@ Depends:
     lattice
 Imports:
     knitr
+Suggests:
+    lavaan
 ByteCompile: yes
 LazyLoad: yes
 LazyData: yes
