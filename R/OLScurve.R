@@ -123,6 +123,7 @@ OLScurve <- function(formula, data, time = data.frame(time = 0:(ncol(data)-1)), 
 	npars <- length(lm(formula, dat)$coef)	
 	pars <- matrix(0,nrow(data),npars)
 	res <- lower <- upper <- pred <- data	
+    R2 <- numeric(nrow(data))    
 	for(i in 1L:nrow(data)){
 		y <- as.numeric(data[i,])
         dat <- data.frame(y=y, time)
@@ -133,9 +134,10 @@ OLScurve <- function(formula, data, time = data.frame(time = 0:(ncol(data)-1)), 
 		lower[i,] <- tmp[ ,2L] 
 		upper[i,] <- tmp[ ,3L]
 		res[i, ] <- residuals(mod)
+        R2[i] <- summary(mod)$r.squared
 	}	
 	mod <- list(pars=pars, pred=pred, lower=lower, upper=upper, res=res, data=data.frame(data), 
-        orgdata=orgdata, formula=formula, omitted=nrow(data)/nrow(orgdata), time=time, call=call)
+        orgdata=orgdata, formula=formula, omitted=nrow(data)/nrow(orgdata), time=time, R2=R2, call=call)
 	class(mod) <- "OLScurve"
 	mod
 }
@@ -212,7 +214,8 @@ print.OLScurve <- function(x, group = NULL, SE = TRUE, adjust = FALSE, digits = 
 		"\n", sep = "")
 	cat("\nNote: ", (1-x$omitted)*100,
 		"% ommited cases. \n", sep='')	
-	cat("Pooled standard error =",sqrt(varE),"\n\n")	
+	cat("Pooled standard error =",round(sqrt(varE),4),"\n")	    
+	cat("R2 average = ",round(mean(x$R2),3)," (SD = ",round(sd(x$R2),3), ")\n\n", sep='')
 	cat("MEANS:\n\n")	
 	print(Meanslist)	
 	if(SE){		
