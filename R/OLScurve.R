@@ -136,6 +136,9 @@ OLScurve <- function(formula, data, time = data.frame(time = 0:(ncol(data)-1)), 
 		res[i, ] <- residuals(mod)
         R2[i] <- summary(mod)$r.squared
 	}	
+	mf <- model.frame(formula, data=data.frame(y=as.numeric(data[1,]), time))
+	mm <- model.matrix(formula, mf)        
+    colnames(pars) <- colnames(mm)
 	mod <- list(pars=pars, pred=pred, lower=lower, upper=upper, res=res, data=data.frame(data), 
         orgdata=orgdata, formula=formula, omitted=nrow(data)/nrow(orgdata), time=time, R2=R2, call=call)
 	class(mod) <- "OLScurve"

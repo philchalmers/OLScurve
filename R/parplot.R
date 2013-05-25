@@ -19,11 +19,15 @@
 #' 
 #' \dontrun{
 #' data <- t(t(matrix(rnorm(1000),200)) + 1:5)  
+#' group <- rep(c('Male', 'Female'), each=nrow(data)/2)
 #' mod <- OLScurve(~ time, data = data)	
 #' parplot(mod)
 #' parplot(mod, type = 'boxplot')
 #' parplot(mod, type = 'splom')
 #' 
+#' parplot(mod, group=group)
+#' parplot(mod, type='boxplot', group=group)
+#' parplot(mod, type='splom', group=group)
 #' }
 parplot <- function(object, ...){
 	UseMethod('parplot')
@@ -34,43 +38,27 @@ parplot <- function(object, ...){
 #' @method parplot OLScurve 
 parplot.OLScurve <- function(object, type = 'hist', group = NULL, 
 	breaks = NULL, prompt = TRUE, ...)
-{
-	pars <- object$pars
-	npars <- ncol(pars)
-	f <- deparse(object$formula[[3]])
-	tmp <- unlist(strsplit(f,"\\+"))
-	Names <- c("(intercept-", tmp)
-	if(any(grep("I\\(",Names))){
-		Names <- gsub("I\\(","",Names)		
-		Names <- gsub("\\)\\)","-",Names)
-		Names <- gsub("\\)","",Names)		
-	}
-	Names <- gsub(" ","",Names)
-	Names <- gsub("-",")",Names)	
-	pars2 <- data.frame(pars)
-	colnames(pars2) <- paste('X',1:npars,sep='')		
-	forms <- paste("~ X",1:npars,sep='')	
-	if(type == 'splom'){
-		pars <- data.frame(pars)
-		colnames(pars) <- Names
-		if(is.null(group)) print(splom(~pars, data = pars, main = 'Growth Parameters'))
-		else {
-			pars$group <- as.factor(na.omit(data.frame(object$orgdata,group))$group)
-			splom(~pars|group, data = pars, main = 'Growth Parameters')		
-		}
-	}
-	if(prompt) devAskNewPage(ask=TRUE)
-	else devAskNewPage(ask=FALSE)
+{       
+	pars <- as.data.frame(object$pars)    
+    longpars <- data.frame(pars = as.numeric(object$pars),
+                           coef = rep(colnames(object$pars), each=nrow(pars)))
+    if(!is.null(group)){
+        pars$group <- group
+        longpars$group <- rep(group, ncol(object$pars))
+    }
+	if(type == 'splom'){			
+        pars2 <- pars[, colnames(pars) != 'group']        
+		if(is.null(group)) return(splom(~pars, data = pars, main = 'Growth Parameters'))
+		else return(splom(~pars2|group, data = pars, main = 'Growth Parameters'))
+	}	
 	if(type == 'hist'){
-		for(i in 1:npars){      
-			form <- as.formula(forms[i])
-			print(histogram(form,pars2,xlab = Names[i],breaks = breaks,main = 'Parameter Distributions'))
-		}
+	    if(is.null(group)) return(histogram(~pars|coef, data=longpars, breaks = breaks, 
+                         main = 'Parameter Distributions'))			
+	    else return(histogram(~pars|coef+group, data=longpars, breaks = breaks, 
+                              main = 'Parameter Distributions'))
 	}
 	if(type == 'boxplot'){
-		for(i in 1:npars){
-			form <- as.formula(forms[i])
-			print(bwplot(form,pars2,xlab = Names[i],main = 'Parameter Distributions'))
-		}
+	    if(is.null(group)) return(bwplot(~pars|coef, data=longpars, main = 'Parameter Distributions'))			
+	    else return(bwplot(~pars|coef+group, data=longpars, main = 'Parameter Distributions'))    		
 	}
 }

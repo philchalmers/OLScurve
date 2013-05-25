@@ -6,7 +6,6 @@
 #' 
 #' @aliases subjplot
 #' @param object an object of class \code{OLScurve}
-#' @param group a \code{factor} grouping variable used to partition the results
 #' @param layout a variable to be passed to \code{xyplot} to adjust the graphical layout
 #' @param prompt a logical variable indicating whether \code{devAskNewPage(ask=TRUE)} should be called
 #' @param ... additional arguments to be passed
@@ -34,7 +33,7 @@ subjplot <- function(object, ...){
 #' @S3method subjplot OLScurve
 #' @rdname subjplot 
 #' @method subjplot OLScurve 
-subjplot.OLScurve <- function(object, group = NULL, layout = NULL, prompt = TRUE, ...)
+subjplot.OLScurve <- function(object, layout = NULL, prompt = TRUE, ...)
 {    
 	data <- object$data
 	N <- nrow(data)
@@ -53,8 +52,7 @@ subjplot.OLScurve <- function(object, group = NULL, layout = NULL, prompt = TRUE
 	
 	plotOLScurve <- function(data, fn, group = NULL, layout = NULL, pred)     {
         
-		if(prompt) devAskNewPage(ask=TRUE)
-		else devAskNewPage(ask=FALSE)
+		if(prompt) devAskNewPage(ask=TRUE)		
 		data <- data.frame(data) 
 		if(is.null(data$id)) data$id.o<-1:nrow(data) 
 			else data$id.o <- data$id 
@@ -103,6 +101,7 @@ subjplot.OLScurve <- function(object, group = NULL, layout = NULL, prompt = TRUE
                 pred=datalg$ypred,
     			panel = mypanel)                		  
 		print(subjectPlots)        
-	}
-	plotOLScurve(data, fn, group, layout, object$pred)
+	}	
+	plotOLScurve(data, fn, group=NULL, layout, object$pred)	
+	devAskNewPage(ask=FALSE)
 }

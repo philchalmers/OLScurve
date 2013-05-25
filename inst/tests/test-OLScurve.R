@@ -54,6 +54,20 @@ test_that('all', {
     mod <- OLScurve(~ time, data)    
     expect_is(mod, 'OLScurve')          
     plt <- plot(mod,group)
-    expect_is(plt, 'trellis')          
+    expect_is(plt, 'trellis') 
+    
+    plt <- parplot(mod)
+    expect_is(plt, 'trellis') 
+    plt <- parplot(mod, type = 'boxplot')
+    expect_is(plt, 'trellis') 
+    plt <- parplot(mod, type = 'splom')
+    expect_is(plt, 'trellis') 
+     
+    plt <- parplot(mod, group=group)
+    expect_is(plt, 'trellis') 
+    plt <- parplot(mod, type='boxplot', group=group)
+    expect_is(plt, 'trellis') 
+    plt <- parplot(mod, type='splom', group=group)
+    expect_is(plt, 'trellis') 
 })
 

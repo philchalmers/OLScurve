@@ -33,11 +33,15 @@
 \examples{
 \dontrun{
 data <- t(t(matrix(rnorm(1000),200)) + 1:5)
+group <- rep(c('Male', 'Female'), each=nrow(data)/2)
 mod <- OLScurve(~ time, data = data)
 parplot(mod)
 parplot(mod, type = 'boxplot')
 parplot(mod, type = 'splom')
 
+parplot(mod, group=group)
+parplot(mod, type='boxplot', group=group)
+parplot(mod, type='splom', group=group)
 }
 }
 \author{
