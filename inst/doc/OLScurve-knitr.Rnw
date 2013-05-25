@@ -136,6 +136,10 @@ print(mod.lin, group = gender)
 plot(mod.lin, group=gender)
 @
 
+<< parplotmod, fig.cap='Histograms of parameter coefficients seperated by group.', fig.width=5, fig.height=5>>=
+parplot(mod.lin, group=gender)
+@
+
 Next, we use a scatter-plot matrix graphic (Figure~\ref{fig:splom}) to determine whether the assumption of linearity between trajectory parameters is tenable. Although comparing trajectory parameter relationships does not appear to be common practice according to texts on latent curve modeling \cite<e.g.,>{BollenCurran2006} it is nonetheless an important area that should be probed to ensure that a proper LCM model has been fit to the data. For example, if one were to use Mplus \cite{Muth'enMuth'en2008} to fit a linear LCM to this simulated data they would find that the overall model fit extremely well, $\chi^2(5) = 3.652,\, p = .60$, where the correlation between the slope and intercept factors is $r_{\alpha\beta} = 0.053,\, z = 1.150,\, p = .25$. However, graphical inspection of the OLS parameters using \R{parplot()} reveals that even though the overall model fit may be excellent the conclusion that the intercept and slope are unrelated is far from correct (although it is true that there is no \emph{linear} relationship). It appears that individuals with higher \emph{and} lower initial intercepts tend to have larger slope trajectories, whereas those closely centered around the intercept mean have much smaller slopes. Similar conclusions could be drawn from estimating factor scores from the LCM in Mplus or other software, although the choice of which estimation method to employ may make a difference, and unfortunately researchers are often not comfortable analyzing calculated factor scores---perhaps due to the large literature surrounding factor score indeterminacy \cite{Bollen1989,Mulaik2010}.
 
 << splom, eval=TRUE, fig.width=5, fig.height=5, fig.cap='Scatter-plot matrix between the intercept and slope parameter estimates.'>>=
