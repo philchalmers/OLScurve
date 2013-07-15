@@ -18,6 +18,7 @@ install:
   - Rscript -e 'install.packages("OLScurve", dep = TRUE, repos = "http://cran.rstudio.org")'  
   - Rscript -e 'install.packages("testthat", dep = TRUE, repos = "http://cran.rstudio.org")'
   - Rscript -e 'install.packages("knitr", dep = TRUE, repos = "http://cran.rstudio.org")'
+  - Rscript -e 'install.packages("lavaan", dep = TRUE, repos = "http://cran.rstudio.org")'
 
 # run tests
 script:
