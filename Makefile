@@ -15,9 +15,6 @@ install: build
 check: build
 	cd ..;\
 	R CMD check $(PKGNAME)_$(PKGVERS).tar.gz --as-cran
-	
-test: 
-	Rscript -e "library('testthat',quietly=TRUE);library('mirt',quietly=TRUE);options(warn=2);test_package('mirt')"
 
 clean:
 	cd ..;\
