@@ -6,7 +6,7 @@ all: check clean
 
 build:
 	cd ..;\
-	R CMD build $(PKGSRC)
+	R CMD build $(PKGSRC) --no-build-vignettes
 
 install: build
 	cd ..;\
@@ -14,7 +14,7 @@ install: build
 
 check: build
 	cd ..;\
-	R CMD check $(PKGNAME)_$(PKGVERS).tar.gz --as-cran
+	R CMD check $(PKGNAME)_$(PKGVERS).tar.gz --as-cran --no-build-vignettes
 
 clean:
 	cd ..;\
