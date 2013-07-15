@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 COPYING
 inst/doc/Makefile
+.travis.yml
