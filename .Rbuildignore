@@ -4,3 +4,4 @@
 COPYING
 inst/doc/Makefile
 .travis.yml
+Makefile
