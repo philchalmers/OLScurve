@@ -18,10 +18,9 @@ Description: Provides tools for more easily organizing and
     trajectories.
 Depends:
     lattice
-Imports:
-    testthat,
-    knitr
 Suggests:
+    testthat,
+    knitr,
     lavaan
 ByteCompile: yes
 LazyLoad: yes
