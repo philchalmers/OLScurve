@@ -1,5 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.gitignore
 COPYING
-inst/doc/Makefile
-.travis.yml
+inst/doc/Makefile.travis.yml
