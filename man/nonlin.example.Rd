@@ -7,12 +7,11 @@
   measure row was Male or Female}
 }
 \description{
-  An artificial dataset simulated by the parameters given
-  in the vignette file for \code{OLScurve}.
+An artificial dataset simulated by the parameters given in
+the vignette file for \code{OLScurve}.
 }
 \author{
-  Phil Chalmers \email{rphilip.chalmers@gmail.com}
+Phil Chalmers \email{rphilip.chalmers@gmail.com}
 }
 \keyword{data}
-\keyword{datasets}
 

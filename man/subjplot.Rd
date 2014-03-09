@@ -3,10 +3,9 @@
 \alias{subjplot.OLScurve}
 \title{Plot individually estimated parameters}
 \usage{
-  subjplot(object, ...)
+subjplot(object, ...)
 
-  \method{subjplot}{OLScurve} (object, layout = NULL,
-    prompt = TRUE, ...)
+\method{subjplot}{OLScurve}(object, layout = NULL, prompt = TRUE, ...)
 }
 \arguments{
   \item{object}{an object of class \code{OLScurve}}
@@ -20,9 +19,9 @@
   \item{...}{additional arguments to be passed}
 }
 \description{
-  A plotting function for displaying the individuals
-  trajectories and their modelled functional form. Useful
-  for detecting aberrant individual trajectories.
+A plotting function for displaying the individuals
+trajectories and their modelled functional form. Useful for
+detecting aberrant individual trajectories.
 }
 \examples{
 \dontrun{
@@ -39,7 +38,7 @@ subjplot(mod2)
 }
 }
 \author{
-  Phil Chalmers \email{rphilip.chalmers@gmail.com}
+Phil Chalmers \email{rphilip.chalmers@gmail.com}
 }
 \keyword{OLS,}
 \keyword{growth}

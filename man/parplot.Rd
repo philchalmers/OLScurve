@@ -3,10 +3,10 @@
 \alias{parplot.OLScurve}
 \title{Plot distribution of parameters}
 \usage{
-  parplot(object, ...)
+parplot(object, ...)
 
-  \method{parplot}{OLScurve} (object, type = "hist",
-    group = NULL, breaks = NULL, prompt = TRUE, ...)
+\method{parplot}{OLScurve}(object, type = "hist", group = NULL,
+  breaks = NULL, prompt = TRUE, ...)
 }
 \arguments{
   \item{object}{an object of class \code{OLScurve}}
@@ -27,8 +27,8 @@
   \item{...}{additional arguments to be passed}
 }
 \description{
-  A plotting function for displaying the distribution of
-  the OLS parameter estimates.
+A plotting function for displaying the distribution of the
+OLS parameter estimates.
 }
 \examples{
 \dontrun{
@@ -45,7 +45,7 @@ parplot(mod, type='splom', group=group)
 }
 }
 \author{
-  Phil Chalmers \email{rphilip.chalmers@gmail.com}
+Phil Chalmers \email{rphilip.chalmers@gmail.com}
 }
 \keyword{OLS,}
 \keyword{growth}

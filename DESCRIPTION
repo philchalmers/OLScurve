@@ -28,8 +28,3 @@ LazyData: yes
 Repository: github
 License: GPL (>= 2)
 URL: https://github.com/philchalmers/OLScurve
-Collate:
-    'OLScurve.R'
-    'parplot.R'
-    'subjplot.R'
-    'OLScurve-package.R'

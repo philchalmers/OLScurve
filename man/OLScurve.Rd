@@ -4,14 +4,12 @@
 \alias{print.OLScurve}
 \title{Ordinary least squares growth curve trajectories}
 \usage{
-  OLScurve(formula, data,
-    time = data.frame(time = 0:(ncol(data) - 1)), ...)
+OLScurve(formula, data, time = data.frame(time = 0:(ncol(data) - 1)), ...)
 
-  \method{print}{OLScurve} (x, group = NULL, SE = TRUE,
-    adjust = FALSE, digits = 3, ...)
+\method{print}{OLScurve}(x, group = NULL, SE = TRUE, adjust = FALSE,
+  digits = 3, ...)
 
-  \method{plot}{OLScurve} (x, group = NULL, sep = FALSE,
-    ...)
+\method{plot}{OLScurve}(x, group = NULL, sep = FALSE, ...)
 }
 \arguments{
   \item{formula}{a \code{formula} specifying how the
@@ -48,43 +46,42 @@
   upper bounds of the true variance parameters}
 }
 \description{
-  The \code{OLScurve} provides a simple way of specifying
-  ordinary least squares (OLS) growth curve models in R.
-  Individual OLS trajectories are fit to each case and an
-  OLScurve object is returned which can be passed to
-  several graphical and summary function within the
-  package.
+The \code{OLScurve} provides a simple way of specifying
+ordinary least squares (OLS) growth curve models in R.
+Individual OLS trajectories are fit to each case and an
+OLScurve object is returned which can be passed to several
+graphical and summary function within the package.
 }
 \details{
-  As Bollen and Curran (2006) note, there are a variety of
-  advantages to using the case-by-case approach for
-  estimating trajectory parameters. First of all, OLS
-  estimation is intuitively appealing, making it a good
-  pedagogical tool for introducing how to model
-  trajectories, and illuminates many essential conditions
-  and assumptions necessary for LCMs. Second, prediction of
-  the parameters for individual trajectory estimates are
-  calculated for each case in the sample, which can lead to
-  several diagnostics by statistical and graphical means.
-  Also, summary statistics can be computed for these
-  estimates (which can also be graphically portrayed) and
-  if need be these estimates can be analyzed further by
-  other statistical frameworks.
+As Bollen and Curran (2006) note, there are a variety of
+advantages to using the case-by-case approach for
+estimating trajectory parameters. First of all, OLS
+estimation is intuitively appealing, making it a good
+pedagogical tool for introducing how to model trajectories,
+and illuminates many essential conditions and assumptions
+necessary for LCMs. Second, prediction of the parameters
+for individual trajectory estimates are calculated for each
+case in the sample, which can lead to several diagnostics
+by statistical and graphical means. Also, summary
+statistics can be computed for these estimates (which can
+also be graphically portrayed) and if need be these
+estimates can be analyzed further by other statistical
+frameworks.
 
-  Unfortunately there are also several limitation to OLS
-  estimation for LCMs, namely: overall tests of fit are not
-  readily available, the structure of the error variances
-  must be unrealistically constrained to estimate a pooled
-  standard error, the latent factors cannot be regressed
-  without error on other exogenous or time-varying
-  variables, and analytic significance tests are often not
-  readily available (Bollen & Curran, 2006). However, OLS
-  estimation may still be useful in the preliminary stages
-  of latent curve modeling for (a) selecting appropriate
-  functional forms of growth, (b) examining unconditional
-  population homogeneity, (c) observing whether the
-  relationship between growth factors are linear, and for
-  (d) detecting influential outliers (Carrig et al., 2004).
+Unfortunately there are also several limitation to OLS
+estimation for LCMs, namely: overall tests of fit are not
+readily available, the structure of the error variances
+must be unrealistically constrained to estimate a pooled
+standard error, the latent factors cannot be regressed
+without error on other exogenous or time-varying variables,
+and analytic significance tests are often not readily
+available (Bollen & Curran, 2006). However, OLS estimation
+may still be useful in the preliminary stages of latent
+curve modeling for (a) selecting appropriate functional
+forms of growth, (b) examining unconditional population
+homogeneity, (c) observing whether the relationship between
+growth factors are linear, and for (d) detecting
+influential outliers (Carrig et al., 2004).
 }
 \examples{
 \dontrun{
@@ -138,20 +135,19 @@ plot(mod,group)
 }
 }
 \author{
-  Phil Chalmers \email{rphilip.chalmers@gmail.com}
+Phil Chalmers \email{rphilip.chalmers@gmail.com}
 }
 \references{
-  Bollen, K. A. & Curran, P. J. (2006). \emph{Latent Curve
-  Models: A Structural Equation Perspective}. John Wiley &
-  Sons.
+Bollen, K. A. & Curran, P. J. (2006). \emph{Latent Curve
+Models: A Structural Equation Perspective}. John Wiley &
+Sons.
 
-  Carrig, M. M., Wirth, R. J., & Curran, P. J. (2004). A
-  SAS Macro for Estimating and Visualizing Individual
-  Growth Curves. \emph{Structural Equation Modeling, 11},
-  132-149.
+Carrig, M. M., Wirth, R. J., & Curran, P. J. (2004). A SAS
+Macro for Estimating and Visualizing Individual Growth
+Curves. \emph{Structural Equation Modeling, 11}, 132-149.
 }
 \seealso{
-  \code{\link{parplot}}, \code{\link{subjplot}}
+\code{\link{parplot}}, \code{\link{subjplot}}
 }
 \keyword{OLS,}
 \keyword{growth}
