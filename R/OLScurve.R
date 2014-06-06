@@ -145,7 +145,6 @@ OLScurve <- function(formula, data, time = data.frame(time = 0:(ncol(data)-1)), 
 	mod
 }
 
-#' @S3method print OLScurve
 #' @rdname OLScurve 
 #' @method print OLScurve 
 #' @param adjust logical; apply adjustment to make the variances unbiased? Only applicable for 
@@ -231,10 +230,10 @@ print.OLScurve <- function(x, group = NULL, SE = TRUE, adjust = FALSE, digits = 
 	invisible(list(Meanslist,Covlist,SElist,varE))
 }
 
-#' @S3method plot OLScurve
+#' @param lattice logical; use lattice to generate plots? If FALSE, ggplot2 will be used
 #' @rdname OLScurve
 #' @method plot OLScurve 
-plot.OLScurve <- function(x, group = NULL, sep = FALSE, ...){
+plot.OLScurve <- function(x, group = NULL, sep = FALSE, lattice = TRUE, ...){
 	data <- data.frame(x$pred)
 	N <- nrow(data)
 	fn <- fn1 <- x$formula
@@ -250,7 +249,8 @@ plot.OLScurve <- function(x, group = NULL, sep = FALSE, ...){
 		# for(i in 1:N) IND[i] <- ID[group[i] == meannames]	 	
 	# }	
 		
-	plotOLScurve <- function(data, fn, meanpred, ind = IND, group = NULL, layout = NULL) {				
+	plotOLScurve <- function(data, fn, meanpred, ind = IND, group = NULL, layout = NULL,
+                             lattice=TRUE) {				
 		if(is.null(data$id)) data$id.o <- 1:nrow(data)
 			else data$id.o <- data$id 		  
 		if(!is.null(group)) 
@@ -287,16 +287,20 @@ plot.OLScurve <- function(x, group = NULL, sep = FALSE, ...){
 			grouppred <- meanpred[[1]] ###FIXME
 			panel.lines(x, grouppred, lwd=2, col='black')
 		}
-		groupPlots <- xyplot(plot.fn, datalg, groups = factor(id), 
-			layout = layout,
-			xlab = "Time",
-			ylab = "Predicted",
-			main = 'Group Plots',
-			meanpred = meanpred, 			
-			IND = datalg$ind,
-			panel = panel.superpose,
-			panel.groups = mypanel)
+        if(lattice){
+    		groupPlots <- xyplot(plot.fn, datalg, groups = factor(id), 
+    			layout = layout,
+    			xlab = "Time",
+    			ylab = "Predicted",
+    			main = 'Group Plots',
+    			meanpred = meanpred, 			
+    			IND = datalg$ind,
+    			panel = panel.superpose,
+    			panel.groups = mypanel)
+        } else {
+            groupPlots <- 0
+        }
 		return(groupPlots)				
 	}
-	plotOLScurve(data, fn, meanpred, IND, group, layout = NULL)
+	plotOLScurve(data, fn, meanpred, IND, group, layout = NULL, lattice=lattice)
 }

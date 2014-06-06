@@ -30,10 +30,11 @@ subjplot <- function(object, ...){
 	UseMethod('subjplot')
 }
 
-#' @S3method subjplot OLScurve
+#' @export subjplot
+#' @param lattice logical; use lattice to generate plots? If FALSE, ggplot2 will be used
 #' @rdname subjplot 
 #' @method subjplot OLScurve 
-subjplot.OLScurve <- function(object, layout = NULL, prompt = TRUE, ...)
+subjplot.OLScurve <- function(object, layout = NULL, prompt = TRUE, lattice = TRUE, ...)
 {    
 	data <- object$data
 	N <- nrow(data)
@@ -50,7 +51,7 @@ subjplot.OLScurve <- function(object, layout = NULL, prompt = TRUE, ...)
 	
 	if(is.null(layout)) layout <- c(ceiling(log(N)),ceiling(log(N)))
 	
-	plotOLScurve <- function(data, fn, group = NULL, layout = NULL, pred)     {
+	plotOLScurve <- function(data, fn, group = NULL, layout = NULL, pred, lattice=TRUE){
         
 		if(prompt) devAskNewPage(ask=TRUE)		
 		data <- data.frame(data) 
@@ -90,18 +91,22 @@ subjplot.OLScurve <- function(object, layout = NULL, prompt = TRUE, ...)
 			panel.xyplot(x, y, col = colours[subscripts], ...)            			
 			panel.lines(x, pred[subscripts])						
 		}
-        subjectPlots <- xyplot( y ~ time | factor(id), data=datalg, 
-                layout = layout,
-    			xlab = "time",
-    			ylab = "",
-    			main = 'Subject plots',
-                upper = datalg$upper,
-    		    lower = datalg$lower,                  
-                colours = datalg$colours, 
-                pred=datalg$ypred,
-    			panel = mypanel)                		  
-		print(subjectPlots)        
+        if(lattice){
+            subjectPlots <- xyplot( y ~ time | factor(id), data=datalg, 
+                    layout = layout,
+        			xlab = "time",
+        			ylab = "",
+        			main = 'Subject plots',
+                    upper = datalg$upper,
+        		    lower = datalg$lower,                  
+                    colours = datalg$colours, 
+                    pred=datalg$ypred,
+        			panel = mypanel)                		  
+        } else {
+            subjectPlots <- 0
+        }
+		return(subjectPlots)        
 	}	
-	plotOLScurve(data, fn, group=NULL, layout, object$pred)	
 	devAskNewPage(ask=FALSE)
+	plotOLScurve(data, fn, group=NULL, layout, object$pred, lattice=lattice)	
 }

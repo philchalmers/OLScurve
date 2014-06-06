@@ -33,11 +33,12 @@ parplot <- function(object, ...){
 	UseMethod('parplot')
 }
 
-#' @S3method parplot OLScurve
+#' @export parplot
+#' @param lattice logical; use lattice to generate plots? If FALSE, ggplot2 will be used
 #' @rdname parplot 
 #' @method parplot OLScurve 
 parplot.OLScurve <- function(object, type = 'hist', group = NULL, 
-	breaks = NULL, prompt = TRUE, ...)
+	breaks = NULL, prompt = TRUE, lattice = TRUE, ...)
 {       
 	pars <- as.data.frame(object$pars)    
     longpars <- data.frame(pars = as.numeric(object$pars),
@@ -46,19 +47,24 @@ parplot.OLScurve <- function(object, type = 'hist', group = NULL,
         pars$group <- group
         longpars$group <- rep(group, ncol(object$pars))
     }
-	if(type == 'splom'){			
-        pars2 <- pars[, colnames(pars) != 'group']        
-		if(is.null(group)) return(splom(~pars, data = pars, main = 'Growth Parameters'))
-		else return(splom(~pars2|group, data = pars, main = 'Growth Parameters'))
-	}	
-	if(type == 'hist'){
-	    if(is.null(group)) return(histogram(~pars|coef, data=longpars, breaks = breaks, 
-                         main = 'Parameter Distributions'))			
-	    else return(histogram(~pars|coef+group, data=longpars, breaks = breaks, 
-                              main = 'Parameter Distributions'))
-	}
-	if(type == 'boxplot'){
-	    if(is.null(group)) return(bwplot(~pars|coef, data=longpars, main = 'Parameter Distributions'))			
-	    else return(bwplot(~pars|coef+group, data=longpars, main = 'Parameter Distributions'))    		
-	}
+    if(lattice){
+    	if(type == 'splom'){			
+            pars2 <- pars[, colnames(pars) != 'group']        
+    		if(is.null(group)) return(splom(~pars, data = pars, main = 'Growth Parameters'))
+    		else return(splom(~pars2|group, data = pars, main = 'Growth Parameters'))
+    	}	
+    	if(type == 'hist'){
+    	    if(is.null(group)) return(histogram(~pars|coef, data=longpars, breaks = breaks, 
+                             main = 'Parameter Distributions'))			
+    	    else return(histogram(~pars|coef+group, data=longpars, breaks = breaks, 
+                                  main = 'Parameter Distributions'))
+    	}
+    	if(type == 'boxplot'){
+    	    if(is.null(group)) return(bwplot(~pars|coef, data=longpars, main = 'Parameter Distributions'))			
+    	    else return(bwplot(~pars|coef+group, data=longpars, main = 'Parameter Distributions'))    		
+    	}
+    } else {
+        
+        
+    }
 }
