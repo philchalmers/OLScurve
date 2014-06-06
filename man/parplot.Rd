@@ -7,7 +7,7 @@
 parplot(object, ...)
 
 \method{parplot}{OLScurve}(object, type = "hist", group = NULL,
-  breaks = NULL, prompt = TRUE, lattice = TRUE, ...)
+  breaks = NULL, prompt = TRUE, ...)
 }
 \arguments{
 \item{object}{an object of class \code{OLScurve}}
@@ -22,8 +22,6 @@ for a histogram, boxplot, or scatter plot matrix}
 \item{prompt}{a logical variable indicating whether \code{devAskNewPage(ask=TRUE)} should be called}
 
 \item{...}{additional arguments to be passed}
-
-\item{lattice}{logical; use lattice to generate plots? If FALSE, ggplot2 will be used}
 }
 \description{
 A plotting function for displaying the distribution of the OLS parameter

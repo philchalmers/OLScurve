@@ -230,10 +230,10 @@ print.OLScurve <- function(x, group = NULL, SE = TRUE, adjust = FALSE, digits = 
 	invisible(list(Meanslist,Covlist,SElist,varE))
 }
 
-#' @param lattice logical; use lattice to generate plots? If FALSE, ggplot2 will be used
 #' @rdname OLScurve
 #' @method plot OLScurve 
-plot.OLScurve <- function(x, group = NULL, sep = FALSE, lattice = TRUE, ...){
+plot.OLScurve <- function(x, group = NULL, sep = FALSE, ...){
+    lattice = TRUE
 	data <- data.frame(x$pred)
 	N <- nrow(data)
 	fn <- fn1 <- x$formula

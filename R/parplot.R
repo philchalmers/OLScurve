@@ -34,12 +34,12 @@ parplot <- function(object, ...){
 }
 
 #' @export parplot
-#' @param lattice logical; use lattice to generate plots? If FALSE, ggplot2 will be used
 #' @rdname parplot 
 #' @method parplot OLScurve 
 parplot.OLScurve <- function(object, type = 'hist', group = NULL, 
-	breaks = NULL, prompt = TRUE, lattice = TRUE, ...)
+	breaks = NULL, prompt = TRUE, ...)
 {       
+    lattice <- TRUE
 	pars <- as.data.frame(object$pars)    
     longpars <- data.frame(pars = as.numeric(object$pars),
                            coef = rep(colnames(object$pars), each=nrow(pars)))

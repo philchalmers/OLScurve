@@ -18,8 +18,6 @@ Description: Provides tools for more easily organizing and
     trajectories.
 Depends:
     lattice
-Imports: 
-    ggplot2
 Suggests:
     testthat,
     knitr,

@@ -10,7 +10,7 @@ OLScurve(formula, data, time = data.frame(time = 0:(ncol(data) - 1)), ...)
 \method{print}{OLScurve}(x, group = NULL, SE = TRUE, adjust = FALSE,
   digits = 3, ...)
 
-\method{plot}{OLScurve}(x, group = NULL, sep = FALSE, lattice = TRUE, ...)
+\method{plot}{OLScurve}(x, group = NULL, sep = FALSE, ...)
 }
 \arguments{
 \item{formula}{a \code{formula} specifying how the functional form of \code{time} should be
@@ -38,8 +38,6 @@ is for equal spacing and this variable is name \code{time}.}
 \item{adjust}{logical; apply adjustment to make the variances unbiased? Only applicable for
 simple linear trajectories. Unadjusted valuse can be interpreted as upper bounds of the true
 variance parameters}
-
-\item{lattice}{logical; use lattice to generate plots? If FALSE, ggplot2 will be used}
 }
 \description{
 The \code{OLScurve} provides a simple way of specifying ordinary least squares (OLS)

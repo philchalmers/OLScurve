@@ -6,8 +6,7 @@
 \usage{
 subjplot(object, ...)
 
-\method{subjplot}{OLScurve}(object, layout = NULL, prompt = TRUE,
-  lattice = TRUE, ...)
+\method{subjplot}{OLScurve}(object, layout = NULL, prompt = TRUE, ...)
 }
 \arguments{
 \item{object}{an object of class \code{OLScurve}}
@@ -17,8 +16,6 @@ subjplot(object, ...)
 \item{prompt}{a logical variable indicating whether \code{devAskNewPage(ask=TRUE)} should be called}
 
 \item{...}{additional arguments to be passed}
-
-\item{lattice}{logical; use lattice to generate plots? If FALSE, ggplot2 will be used}
 }
 \description{
 A plotting function for displaying the individuals trajectories and their

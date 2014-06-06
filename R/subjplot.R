@@ -31,11 +31,11 @@ subjplot <- function(object, ...){
 }
 
 #' @export subjplot
-#' @param lattice logical; use lattice to generate plots? If FALSE, ggplot2 will be used
 #' @rdname subjplot 
 #' @method subjplot OLScurve 
-subjplot.OLScurve <- function(object, layout = NULL, prompt = TRUE, lattice = TRUE, ...)
+subjplot.OLScurve <- function(object, layout = NULL, prompt = TRUE, ...)
 {    
+    lattice = TRUE
 	data <- object$data
 	N <- nrow(data)
 	fn <- fn1 <- object$formula
